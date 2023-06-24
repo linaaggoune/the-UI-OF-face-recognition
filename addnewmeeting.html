@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add New Meeting</title>
+</head>
+<body>
+    <h1>Add New Meeting</h1>
+    <form method="POST" action="{{ url_for('addnewmeeting') }}">
+        <label for="meet_title">Meeting Title:</label>
+        <input type="text" name="meet_title" id="meet_title" required>
+        <br>
+        
+        <label for="employee_ids">Select Employees:</label>
+        <select name="employee_ids" id="employee_ids" multiple required>
+            {% for emp in allemp %}
+                <option value="{{ emp.id }}">{{ emp.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <label for="date_of_meeting">Date of Meeting:</label>
+        <input type="date" name="date_of_meeting" id="date_of_meeting" required>
+        <br>
+        
+        <label for="start_time">Start Time:</label>
+        <input type="time" name="start_time" id="start_time" required>
+        <br>
+        
+        <label for="end_time">End Time:</label>
+        <input type="time" name="end_time" id="end_time" required>
+        <br>
+        
+        <label for="meeting_place">Meeting Place:</label>
+        <input type="text" name="meeting_place" id="meeting_place" required>
+        <br>
+        
+        <label for="order_of_the_day">Order of the Day:</label>
+        <textarea name="order_of_the_day" id="order_of_the_day" rows="4" cols="50" required></textarea>
+        <br>
+        
+        <input type="submit" value="Add Meeting">
+    </form>
+</body>
+</html>
+
+
+
+<!--DOCTYPE html>
+<html>
+<head>
+    <title>Add New Meeting</title>
+</head>
+<body>
+    <h1>Add New Meeting</h1>
+    <form action="{{ url_for('addnewmeeting') }}" method="POST">
+        <label for="meet_title">Meeting Title:</label>
+        <input type="text" name="meet_title" id="meet_title" required><br><br>
+
+        <label for="employee_ids">Select Employee Attendees:</label>
+        <select name="employee_ids" id="employee_ids" multiple size="4" required>
+    {% for employee in allemp %}
+         <option value="{{ employee['empid'] }}">{{ employee['name'] }}</option>
+    {% endfor %}
+</select>
+
+        <br><br>
+
+        <input type="submit" value="Add Meeting">
+    </form>
+</body>
+</html--> 
+
+        
+
+
+        

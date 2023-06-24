@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+    <!--link rel="stylesheet" href="../static/runningmeeting.css" /-->
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+    <title>meetingstart</title>
+  </head>
+  <body>
+    <div>
+      <video id="vid"></video>
+    </div>
+    <br />
+    <canvas id="frame-canvas"></canvas>
+
+    <button id="close-camera-btn">End Meeting</button>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let video = document.getElementById("vid");
+      let mediaDevices = navigator.mediaDevices;
+      video.muted = true;
+      let st;
+      var canvasElement = document.getElementById("frame-canvas");
+      var context = canvasElement.getContext("2d");
+
+      // Accessing the user camera and video.
+      mediaDevices
+        .getUserMedia({
+          video: true,
+          audio: true,
+        })
+        .then((stream) => {
+          // Changing the source of video to current stream.
+          video.srcObject = stream;
+          video.addEventListener("loadedmetadata", () => {
+            video.play();
+          });
+          st = stream;
+        })
+        .catch(alert);
+
+      var captureFrame = () => {
+        // Capture frame from video stream
+        context.drawImage(
+          video,
+          0,
+          0,
+          canvasElement.width,
+          canvasElement.height
+        );
+
+        // Perform custom action with the captured frame
+        // Replace this with your desired logic
+        canvasElement.toBlob((blob) => {
+          // Create a FormData object and append the captured frame
+          // Convert the frame to Base64
+          var frameData = canvasElement.toDataURL("image/jpeg");
+
+          // Create the JSON object
+          var jsonData = {
+            frame: frameData,
+          };
+
+          // Make the AJAX request
+          fetch("/modelPredict", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(jsonData),
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.json(); // Parse the response as JSON
+              } else {
+                throw new Error("Failed to send frame: " + response.status);
+              }
+            })
+            .then((data) => {
+              // Process the response data
+               console.log(data);
+            })
+            
+           
+            .catch(function (error) {
+              console.error("Error sending frame:", error);
+            });
+          // Schedule the next frame capture after 5 seconds
+          setTimeout(captureFrame, 5000);
+        });
+      };
+      captureFrame();
+
+      $("#close-camera-btn").click(function () {
+        if (st) {
+          const tracks = st.getTracks();
+          tracks.forEach(function (track) {
+            track.stop();
+          });
+          video.srcObject = null;
+          var baseURL = window.location.protocol + "//" + window.location.host;
+          window.location.href = baseURL + "/meetings";
+          $.ajax({
+            url: "/end_meeting",
+            method: "POST",
+            success: function (response) {
+                // Redirect to the result page
+                window.location.href = response.redirect;
+            },
+            error: function (error) {
+                console.error("Error ending meeting:", error);
+            }
+        });
+        }
+      });
+    });
+  </script>
+  <style>
+    video {
+      width: 1200px;
+      height: 720px;
+      object-fit: cover;
+    }
+  </style>
+</html>

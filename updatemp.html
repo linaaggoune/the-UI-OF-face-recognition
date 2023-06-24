@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+    <style type='text/css'>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            /*background:#efefef;*/
+            background: #0d0f0e82;
+            padding: 20px 15px;
+            position: fixed;
+            top: 0;
+            right: 0;
+            left: auto;
+          }
+          
+          .nav-links li {
+            list-style: none;
+            margin: 0 55px;
+          }
+          
+          .nav-links li a {
+            font-family: 'Open Sans', sans-serif;
+          
+              position: relative;
+              color: white;
+              font-size: 17px;
+              font-weight: bold;
+              padding: 6px 0;
+              text-decoration: none;
+              /*text-shadow: 1px 1px 2px #406b73 ;*/
+            }
+            
+          
+          .nav-links li a:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: #2fc0f6;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+          }
+          
+          .nav-links li a:hover:before {
+            width: 100%;
+          }
+          
+          .nav-links li.center a:before {
+            left: 50%;
+            transform: translateX(-50%);
+          }
+          
+          .nav-links li.upward a:before {
+            width: 100%;
+            bottom: -5px;
+            opacity: 0;
+          }
+          
+          .nav-links li.upward a:hover:before {
+            bottom: 0px;
+            opacity: 1;
+          }
+          
+          .nav-links li.forward a:before {
+            width: 100%;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
+          }
+          
+          .nav-links li.forward a:hover:before {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+          .nav-links li a:hover {
+            text-shadow: 0 0 10px #fff, 
+            0 0 20px #fff, 
+            0 0 30px #fff, 
+            0 0 40px #2fc0f6, 
+            0 0 70px #2fc0f6, 
+            0 0 80px #2fc0f6, 
+            0 0 100px #2fc0f6, 
+            0 0 150px #2fc0f6, 
+            0 0 200px #2fc0f6;
+          }
+    
+          header .logo-icon {
+            width: 250px; 
+            height: 75px;
+            margin-right: 7px; 
+            margin-left:20px;
+            margin-top:10px;
+          } 
+          header .logo {
+            text-shadow: 1px 1px 2px #2fc0f6 ;
+            position: relative;
+            color: white;
+            font-size: 17px;
+            text-decoration: none;
+            font-weight: 800;
+            letter-spacing: 1px;
+          }  
+          p-3{
+            margin-left:50px;
+            padding: 50px;
+    
+          }   
+    
+    
+        body {
+            background-image: url('https://cutewallpaper.org/21/1920-x-1080-gif/1920x1080-Wallpapercartoon-Wallpapers-Driverlayer-Search-.gif');
+            background-size: cover;
+            font-family: sans-serif;
+            margin-top: 40px;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+        .p-3 {
+          width: 700px; /* Adjust the width as per your preference */
+          margin: 0 auto; /* Centers the form horizontally */
+          /* Add any other desired CSS properties */
+        }
+      
+        .custom-form .form-control {
+          width: 100%; /* Makes the input fields occupy the full width of the form */
+          /* Add any other desired CSS properties */
+        }
+        table {
+            border: 1px;
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 86%;
+            margin: 100px;
+            
+        }
+        
+        
+        td,
+        th {
+            border: 1px solid black !important;
+            padding: 5px;
+            color:white;
+        }
+        
+        
+       
+        tr:nth-child() {
+            background-color: white;
+        }
+       
+       
+       
+    
+       
+    </style>
+    
+    
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+        
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='dashboard.css')}}"
+            type="text/css"
+          />
+        
+    </head>
+  <body>
+    <header>
+        <h2><img src='..\static\images\logo white .png' alt="Icon" class="logo-icon"><a href="#" class="logo"></a></h2>
+        <ul class="nav-links">
+         <li class="center"><a href="{{ url_for('index')}}" class="nav-link">Home</a></li>
+         <li class="upward"><a href="{{ url_for('dashboard')}}" class="nav-link">Dashboard</a></li>
+         
+         <li class="forward"><a href="{{ url_for('dashboard')}}" class="nav-link">View All Employee</a></li>
+         
+       </ul>
+ 
+       </header>
+      
+     
+
+   
+
+      
+
+      
+        
+
+        <div class="table-responsive-lg caption-top">
+          <caption>
+            <h3 style="font-family: serif;size:85px; margin-left: 600px; margin-top: 150px;  color: white">Let's Update Employee</h3>
+          </caption>
+          <hr />
+          <div class="table-responsive-lg caption-top">
+            
+             <hr>
+             {% if single_emp %}
+            <form class="p-3" action="/updateemployee" method="POST">
+              <div class="mb-2">
+                <label for="empid" class="form-label">EMP ID</label>
+                <input type="text" class="form-control" id="empid" value = "{{single_emp['empid']}}" name="empid" readonly>
+              </div>
+                <div class="mb-2">
+                  <label for="name" class="form-label">Name</label>
+                  <input type="text" class="form-control" id="name" value = "{{single_emp['name']}}" name = "name">
+                </div>
+                <div class="mb-2">
+                  <label for="email" class="form-label">Email</label>
+                  <input type="text" class="form-control" id="email" value= "{{single_emp['email']}}" name="email">
+                </div>
+                <div class="mb-2">
+                    <label for="name" class="form-label">Phone</label>
+                    <input type="text" class="form-control" id="phone" value="{{single_emp['phone']}}" name="phone">
+                  </div>
+                  <div class="mb-2">
+                    <label for="email" class="form-label">Address</label>
+                    <input type="text" class="form-control" id="phone" value = "{{single_emp['address']}}" name = "address">
+                  </div>
+                  {% endif %}
+        <button type="submit" class="btn text-light m-3" style="background-color:rgb(0, 75, 93);">Update Employee</button>
+              </form>
+          </div>
+    </div>
+        </div>
+    
+    

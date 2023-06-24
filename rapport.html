@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rapport Meeting</title>
+    <style>
+      body {
+        background-image: url('https://cutewallpaper.org/21/1920-x-1080-gif/1920x1080-Wallpapercartoon-Wallpapers-Driverlayer-Search-.gif');
+        background-size: cover;
+        font-family: sans-serif;
+        margin-top: 40px;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+    }
+
+        h1 {
+            text-align: center;
+            color:white;
+        }
+
+        p {
+            margin-left: 150px
+            margin-bottom: 10px;
+            color:white;
+        }
+
+        ul {
+            padding-left: 200px;
+            color:white;
+        }
+
+        li {
+            margin-bottom: 5px;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rapport Meeting</h1>
+    <p style="margin-left:150px;">List of Records:</p>
+    <ul>
+      {% for identity in identities %}
+        <li>{{ identity }}</li>
+      {% endfor %}
+    </ul>
+    <p style="margin-left:150px;">Other content of the rapport page...</p>
+    
+</body>
+</html>
+
+

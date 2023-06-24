@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Absence Chart</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <h1>Absence Chart</h1>
+
+    <div id="chart"></div>
+
+    <script>
+        // Retrieve the employee names and absence count from Flask route
+        var employeeNames = {{ employee_names|tojson }};
+        var absenceCount = {{ absence_count|tojson }};
+
+        // Create a trace for the bar chart
+        var trace = {
+            x: employeeNames,
+            y: absenceCount,
+            type: 'bar'
+        };
+
+        // Define the data array
+        var data = [trace];
+
+        // Define the layout
+        var layout = {
+            title: 'Absence Chart',
+            xaxis: { title: 'Employee' },
+            yaxis: { title: 'Absence Count' }
+        };
+
+        // Plot the chart using Plotly
+        Plotly.newPlot('chart', data, layout);
+    </script>
+</body>
+</html>
+
+
